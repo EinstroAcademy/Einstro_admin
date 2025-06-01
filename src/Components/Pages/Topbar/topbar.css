@@ -1,0 +1,132 @@
+/***** HEADER *****/
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    right: 20px;
+    z-index: 10;
+    width: calc(100% - (var(--sidebar-width) + 40px));
+    padding: 15px 0;
+    min-height: 48px;
+    max-height: 48px;
+    background: var(--grey-fc);
+    border-bottom: 1px solid var(--grey-e0);
+  }
+  
+  .header .header-left .nav-title {
+    font-family: var(--semibold);
+    font-size: var(--font-16);
+    margin: 0;
+  }
+  
+  .header .header-right img.profile-img {
+    width: 100%;
+    height: 100%;
+    max-width: 24px;
+    max-height: 24px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .header .header-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+  }
+  
+  .header .header-right .header-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    max-width: 32px;
+    max-height: 32px;
+    border-radius: 50%;
+    background: var(--grey-f5);
+    cursor: pointer;
+  }
+  
+  .header .header-right .header-icon.cart::after {
+    content: attr(data-count);
+    position: absolute;
+    top: 0px;
+    right: 53px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 14px;
+    height: 14px;
+    min-width: 14px;
+    max-width: 14px;
+    min-height: 14px;
+    max-height: 14px;
+    line-height: 14px;
+    border-radius: 50%;
+    font-family: var(--medium);
+    font-size: var(--font-10);
+    background: var(--primary);
+    color: var(--white);
+  }
+  
+  .header .header-right .header-icon img {
+    max-width: 100%;
+  }
+  
+  .header .header-right .header-profile {
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .header .header-right .header-profile-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: auto;
+    min-width: 170px;
+    max-width: 100%;
+    background: var(--white);
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+    border-radius: 6px;
+    padding: 0 15px;
+    margin: 0;
+    overflow: hidden;
+    z-index: 10;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: 0.18s ease-in-out all;
+  }
+  
+  .header .header-right .header-profile:hover .header-profile-dropdown {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+  
+  .header .header-right .header-profile-dropdown li {
+    list-style: none;
+    padding: 10px 0;
+    cursor: pointer;
+    transition: 0.12s ease-in-out all;
+    border-bottom: 1px solid var(--grey-f5);
+    color: var(--black-30);
+  }
+  
+  .header .header-right .header-profile-dropdown li:hover {
+    /* background: var(--primary); */
+    font-family: var(--medium);
+    color: var(--primary);
+  }
+  
+  .header .header-right .header-profile-dropdown li.logout:hover {
+    /* background: rgba(255, 0, 0, 0.65); */
+    color: #ff0000;
+  }
+  
+  /***** END OF HEADER *****/
+  

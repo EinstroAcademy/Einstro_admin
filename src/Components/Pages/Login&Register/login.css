@@ -1,0 +1,20 @@
+.logo-img{
+    width: 200px;
+    height: 100px;
+    object-fit: contain;
+}
+
+.login-input{
+    width:100%;
+}
+
+.login-btn{
+    width: 100%;
+    margin: auto;
+    background-color: #dd0e3a;
+    padding: 10px 0px;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-family: "Metropolis-Bold";
+}

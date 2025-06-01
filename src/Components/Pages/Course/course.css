@@ -1,0 +1,29 @@
+#courseTabs {
+    display: inline-flex;
+    justify-content: space-around;
+    padding: 6px;
+    width: 50%;
+    background: white;
+    text-align: center;
+  }
+
+  #courseTabs .nav-link {
+    font-size: 13px;
+    padding: 9px 10px;
+    line-height: 1;
+    color: #2c2c54;
+    font-family: "Metropolis-Medium", sans-serif;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+  }
+  
+  #courseTabs .nav-link.active{
+    font-family: "Metropolis-Medium", sans-serif;
+    font-weight: 500;
+    background: #dd0e3a !important;
+    color: #ffffff!important;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    transform: scale(1.1);
+    border: none;
+  }

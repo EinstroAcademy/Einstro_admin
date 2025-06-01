@@ -1,0 +1,100 @@
+#profileTabs {
+    display: inline-flex;
+    justify-content: space-around;
+    padding: 6px;
+    width: 15%;
+    background: white;
+    text-align: center;
+  }
+
+  #profileTabs .nav-link {
+    font-size: 13px;
+    padding: 9px 10px;
+    line-height: 1;
+    color: #2c2c54;
+    font-family: "Metropolis-Medium", sans-serif;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+  }
+  
+  #profileTabs .nav-link.active{
+    font-family: "Metropolis-Medium", sans-serif;
+    font-weight: 500;
+    background: #dd0e3a !important;
+    color: #ffffff!important;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    transform: scale(1.1);
+    border: none;
+  }
+  .profile{
+    margin: 20px 0px;
+  }
+
+  .profile-img{
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+  }
+
+  .profile-img-box{
+    margin: 10px 0px;
+  }
+
+  .change_img_btn{
+    margin: 0px 10px;
+    padding: 5px 10px;
+    border: 2px solid #2c2c54;
+    background-color: white;
+    font-size: 14px;
+    border-radius: 5px;
+    color: #2c2c54;
+    font-family: "Metropolis-Medium", sans-serif;
+  }
+  .remove_img_btn{
+    margin: 0px 10px;
+    padding: 5px 10px;
+    border: 2px solid #dd0e3a;
+    background-color: white;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #dd0e3a;
+    font-family: "Metropolis-Medium", sans-serif;
+  }
+
+  .profile_edit_btn{
+    margin: 20px 0px;
+    padding: 5px 20px;
+    border: 1px solid #ffa000;
+    background-color: white;
+    font-size: 14px;
+    border-radius: 5px;
+    color: #ffa000;
+    font-family: "Metropolis-Medium", sans-serif;
+  }
+
+  .profile_save_btn{
+    margin: 20px 0px;
+    padding: 5px 20px;
+    border: 1px solid #66bb6a;
+    background-color: white;
+    border-radius: 5px;
+    color: #66bb6a;
+    font-size: 14px;
+    font-family: "Metropolis-Medium", sans-serif;
+  }
+  .admin_password{
+    position: relative;
+  }
+
+  .admin_password i{
+    position: absolute;
+    top: 12px;
+    right: 15px;
+    cursor: pointer;
+    color: grey;
+  }
+  
+
+  

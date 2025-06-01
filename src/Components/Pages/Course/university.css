@@ -1,0 +1,22 @@
+.uni-edit-img{
+    position: relative;
+    padding: 10px 20px;
+}
+
+.uni-close-btn{
+    position: absolute;
+    top: -5px;
+    right: 20px;
+}
+
+.uni-close-btn .cross{
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+
+.uni-edit-img .uni-img{
+    width: 100px;
+    height: 100px;
+}

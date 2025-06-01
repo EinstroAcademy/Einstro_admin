@@ -1,0 +1,51 @@
+.action-btn i{
+    color: red;
+}
+
+.action-space span{
+    padding: 0px 10px;
+    text-align: center;
+}
+
+.add_blog_btn{
+    border: 1px solid #dd0e3a;
+    border-radius: 5px;
+    padding: 4px 10px;
+    background-color: white;
+    color: #dd0e3a;
+    font-family: "Metropolis-light";
+}
+
+.add_blog_btn:hover{
+    background-color: #dd0e3a;
+    color: white;
+}
+
+.blog-header{
+  
+}
+
+.delete-pop{
+    border: 1px solid #dd0e3a;
+}
+
+.cancel_btn{
+    border: 1px solid #dd0e3a;
+    border-radius: 5px;
+    padding: 4px 10px;
+    background-color: white;
+    color: #dd0e3a;
+    font-family: "Metropolis-light";
+    margin-left: 10px;
+}
+
+.confirm_btn{
+    border: 1px solid #0e23dd;
+    border-radius: 5px;
+    padding: 4px 10px;
+    background-color: white;
+    color: #0e23dd;
+    font-family: "Metropolis-light";
+}
+
+
