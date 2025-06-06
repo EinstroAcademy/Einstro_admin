@@ -1,32 +1,32 @@
 
 @font-face {
   font-family: "Metropolis-Light";
-  src: url(../src/fonts/Metropolis-Thin.otf);
+  src: url(../src/fonts/Inter.ttf);
 }
 
 @font-face {
   font-family: "Metropolis-Black";
-  src: url(../src/fonts/Metropolis-Black.otf);
+  src: url(../src/fonts/Inter.ttf);
 }
 
 @font-face {
   font-family: "Metropolis-Black-italic";
-  src: url(../src/fonts/Metropolis-BlackItalic.otf);
+  src: url(../src/fonts/Inter.ttf);
 }
 
 @font-face {
   font-family: "Metropolis-SemiBold";
-  src: url(../src/fonts/Metropolis-SemiBold.otf);
+  src: url(../src/fonts/Inter.ttf);
 }
 
 @font-face {
   font-family: "Metropolis-Bold";
-  src: url(../src/fonts/Metropolis-Bold.otf);
+  src: url(../src/fonts/Inter.ttf);
 }
 
 @font-face {
   font-family: "Metropolis-Medium";
-  src: url(../src/fonts/Metropolis-Medium.otf);
+  src: url(../src/fonts/Inter.ttf);
 }
 
 @font-face {
@@ -113,5 +113,5 @@ input[type="text"]::placeholder, textarea::placeholder,input[type="email"]::plac
   --stat-yellow: #ffca28;
   --stat-red: #ff7043;
   /* Utilities */
-  --sidebar-width: 240px;
+  --sidebar-width: 70px;
 }

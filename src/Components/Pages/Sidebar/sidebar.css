@@ -35,22 +35,23 @@
     position: relative;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 16px;
-    padding: 15px 15px 15px 24px;
-    margin-bottom: 6px;
+    padding: 10px;
+    margin-bottom: 20px;
     cursor: pointer;
-    max-height: 48px;
-    min-height: 48px;
+    max-height: 38px;
+    min-height: 38px;
     transition: 0.19s ease-in-out all;
   }
   
-  .sidebar .sidebar-menu li:hover {
+  /* .sidebar .sidebar-menu li:hover {
     background: linear-gradient(
       to right,
       rgb(221, 14, 58,0.1),
       rgb(221, 14, 58,0)
     );
-  }
+  } */
   
   .sidebar .sidebar-menu li::before {
     content: "";
@@ -105,5 +106,22 @@
 
   .sidebar-top .logo img {
     width: 100%;
-    max-width: 150px;
   }
+
+  .side-menu-box{
+    width: 48px;
+    height: 48px;
+    background-color:rgb(248, 248, 248);
+    align-items: center ;
+    text-align: center;
+    border-radius: 8px;
+    padding: 12px;
+}
+
+.side-menu-box:hover{
+   background-color:rgb(255, 224, 224);
+}
+
+.side-menu-box.active{
+  background-color:rgb(255, 224, 224);
+}

@@ -1,15 +1,26 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  
 }
 
-code {
+/* code {
   font-family: "Metropolis-Bold";
-}
+} */
+
+
+  
+  @font-face {
+    font-family: 'Inter';
+    src: url(./fonts/Inter.ttf);
+  }
+
+  
+  * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family:'Inter';
+  }
 
 
 
@@ -27,7 +38,7 @@ table.table tbody tr:last-child {
 }
 
 table.table tbody tr:hover {
-  background-color: #f4faff !important;
+  background-color: #f3f3f3 !important;
   cursor: pointer !important;
 }
 

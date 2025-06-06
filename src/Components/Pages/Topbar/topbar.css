@@ -2,18 +2,18 @@
 
 .header {
     display: flex;
-    align-items: center;
+    align-items:center;
     justify-content: space-between;
     position: fixed;
     top: 0;
-    right: 20px;
-    z-index: 10;
-    width: calc(100% - (var(--sidebar-width) + 40px));
-    padding: 15px 0;
-    min-height: 48px;
-    max-height: 48px;
-    background: var(--grey-fc);
-    border-bottom: 1px solid var(--grey-e0);
+    right: 0px;
+    z-index: 15;
+    width: calc(100% - (var(--sidebar-width)));
+    padding: 1.8rem 30px;
+    min-height: 80px;
+    max-height: 80px;
+    background-image: linear-gradient(to right,#ffffff, #DF2E38, #850000);
+  
   }
   
   .header .header-left .nav-title {
@@ -21,6 +21,11 @@
     font-size: var(--font-16);
     margin: 0;
   }
+
+   .header .header-left .nav-title img.small{
+     width: 100%;
+    max-width: 150px;
+   }
   
   .header .header-right img.profile-img {
     width: 100%;

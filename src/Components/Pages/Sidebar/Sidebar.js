@@ -1,50 +1,38 @@
-import React from 'react'
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import { Link, useLocation } from 'react-router-dom';
 import './sidebar.css'
 import logo from '../../../Images/login/Einstro Logo.png'
 import dashboard from '../../../Images/icons/dashboard.svg'
 import study from '../../../Images/icons/study.svg'
 import note from '../../../Images/icons/blog.svg'
 import course from '../../../Images/icons/course.svg'
+import { SidebarData } from './SidebarData';
 
-export const SidebarData=[
-  {
-    link:'/dashboard',
-    name:'Dashboard',
-    img:dashboard,
-    id:'dashboard'
-  },
-  {
-    link:'/abroad',
-    name:'Study Abroad',
-    img:study,
-    id:'abroad'
-  },
-  {
-    link:'/blog',
-    name:'Blog',
-    img:note,
-    id:'blog'
-  },
-  {
-    link:'/course',
-    name:'Course',
-    img:course,
-    id:'blog'
-  },
-]
+
 
 function Sidebar() {
-  
+   const [sidebarMenu, setSidebarMenu] = useState([]);
+  const [activeMenu, setActiveMenu] = useState("");
+  const location = useLocation();
+
+  useEffect(() => {
+    setSidebarMenu(SidebarData);
+  }, []);
+
+  useEffect(() => {
+    const currentPath = location.pathname;
+    const active = SidebarData.find((item) =>
+      currentPath.startsWith(item.link)
+    );
+    if (active) {
+      setActiveMenu(active.id);
+    }
+  }, [location]);
   return (
     <>
     <div className={`sidebar-top`}>
         <div className="logo">
-          <img
-            src={logo}
-            className={"small"}
-            alt="Logo"
-          />
+          
         </div>
       </div>
     <section className={`sidebar`}>
@@ -53,9 +41,15 @@ function Sidebar() {
         return (
           <>
             <Link to={item.link} className="sb-link">
-              <li>
+              <li
+              title={item?.navItem}
+                  onClick={() => setActiveMenu(item.id)}
+                  >
+                <div className={`side-menu-box ${item.id === activeMenu ? "active" : ""}`}>
+
                 <img src={item.img}/>
-                <span>{item.name}</span>
+                </div>
+                {/* <span>{item.name}</span> */}
               </li>
             </Link>
           </>

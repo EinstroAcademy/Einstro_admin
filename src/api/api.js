@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-// export const NodeURL = 'http://localhost:4000';
+export const NodeURL = 'http://localhost:4000';
 // export const NodeURL = 'http://einstro-001-site5.htempurl.com/';
-export const NodeURL = 'https://api.studytez.com';
+// export const NodeURL = 'https://api.studytez.com';
 
 
 export const client = axios.create({

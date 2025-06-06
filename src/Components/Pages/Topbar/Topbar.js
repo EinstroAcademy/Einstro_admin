@@ -8,6 +8,9 @@ import { logout } from '../../../redux/login/login'
 import toast from 'react-hot-toast'
 import { SidebarData } from '../Sidebar/Sidebar'
 
+
+import logo from '../../../Images/login/Einstro Logo.png'
+
 function Topbar() {
   const dispatch=useDispatch()
   const navigate=useNavigate('/')
@@ -22,7 +25,12 @@ function Topbar() {
     <nav className="header" role="navigation">
     <div className="header-left">
       <h6 className="nav-title">
-       {SidebarData.find((list)=>list.link===location.pathname)?.name}
+        <img
+            src={logo}
+            className={"small"}
+            alt="Logo"
+          />
+       {/* {SidebarData.find((list)=>list.link===location.pathname)?.name} */}
       </h6>
     </div>
     <div className="header-right">

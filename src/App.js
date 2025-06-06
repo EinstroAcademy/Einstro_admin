@@ -12,6 +12,7 @@ import ResetPassword from "./Components/Pages/Login&Register/ResetPassword";
 import { Toaster } from "react-hot-toast";
 import MyAccount from "./Components/Pages/MyAccount/MyAccount";
 import Course from "./Components/Pages/Course/Course";
+import Students from "./Components/Pages/Students/Students";
 
 function App() {
   const toastOptions = {
@@ -64,6 +65,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/abroad" element={<Abroad />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/students" element={<Students />} />
           <Route path="/course" element={<Course />} />
           <Route path="/my/account" element={<MyAccount />} />
         </Routes>
