@@ -35,9 +35,9 @@
 }
 
 input[type="text"],input[type="email"],input[type="phone"],input[type="password"],textarea{
-  border: 2px solid rgb(143, 20, 9,0.3); /* Default border color */
+  border: 1px solid #D0D5DD; /* Default border color */
   border-radius: 8px; /* Rounded corners */
-  padding: 8px; /* Padding inside the input field */
+  padding: 12px; /* Padding inside the input field */
   font-size: 16px; /* Font size */
   outline: none; /* Remove default outline */
   transition: border-color 0.3s ease; /* Smooth transition for border color */
@@ -46,7 +46,7 @@ input[type="text"],input[type="email"],input[type="phone"],input[type="password"
 /* Style for the input field when it is focused */
 input[type="text"]:focus, textarea:focus,input[type="email"]:focus,input[type="password"]:focus,input[type="phone"]:focus{
   border-color: #8f1409; /* Change border color on focus */
-  box-shadow: 0 0 5px rgb(143, 20, 9,0.5); /* Optional: Add a subtle shadow */
+  /* box-shadow: 0 0 5px rgb(143, 20, 9,0.5); Optional: Add a subtle shadow */
 }
 
 input[type="text"]::placeholder, textarea::placeholder,input[type="email"]::placeholder,input[type="phone"]::placeholder {

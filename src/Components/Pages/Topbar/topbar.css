@@ -10,8 +10,8 @@
     z-index: 15;
     width: calc(100% - (var(--sidebar-width)));
     padding: 1.8rem 30px;
-    min-height: 80px;
-    max-height: 80px;
+    min-height: 70px;
+    max-height: 70px;
     background-image: linear-gradient(to right,#ffffff, #DF2E38, #850000);
   
   }

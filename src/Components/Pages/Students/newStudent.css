@@ -1,0 +1,50 @@
+.new-std-container{
+    padding: 10px 10px;
+}
+
+.new-std-head{
+    font-size: 18px;
+    font-weight: 600;
+    padding: 10px 0px;
+    color: #101828;
+}
+
+
+.new-std-info{
+    font-size: 14px;
+    font-weight: 400;
+    color: #dd0e3a;
+    margin-bottom: 12px;
+}
+
+
+.std-info label{
+    color: #344054;
+    margin-bottom: 6px;
+    font-size: 14px;
+    font-weight: 400;
+} 
+
+.std-input-control{
+    height: 40px;
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid #D0D5DD;
+    padding: 8px 12px;
+    background-color: transparent;
+    color: #101828;
+}
+.std-input-control:hover{
+    outline: 1px solid #850000;
+    border: none;
+}
+.std-input-control:focus-visible{
+    outline: 1px solid #850000;
+    border: none;
+}
+
+.std-req{
+    color: #344054;
+    font-size: 12px;
+    font-size: 400;
+}

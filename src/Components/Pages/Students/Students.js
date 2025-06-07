@@ -4,8 +4,10 @@ import Pagination from 'react-js-pagination';
 import { Table } from 'reactstrap';
 import request from '../../../api/api';
 import { debounce } from 'lodash';
+import { useNavigate } from 'react-router-dom';
 
 function Students() {
+  const navigate =useNavigate()
     const [pages, setpages] = useState("");
     const [activePage, setactivePage] = useState(1);
     const [currPage, setcurrPage] = useState(25);
@@ -65,11 +67,16 @@ function Students() {
             });
           }
         };
+
+        const addStudent = () =>{
+          navigate('/new/student')
+        }
+
   return (
     <Layout>
          <div className="mybookings-table-wrap mt-4">
         <div className='text-end mb-3'>
-          <button className="add_blog_btn" > Add Students</button>
+          <button className="add_blog_btn" onClick={()=>addStudent()}> Add Students</button>
         </div>
         <Table borderless className={`mybookings-table`}>
           <thead style={{ "--bg-color": "#f3f5ff" }}>
@@ -165,8 +172,11 @@ function Students() {
           linkClass="page-link"
           activeLinkClass="subject"
         />
+
+
          
       </div>
+
     </Layout>
   )
 }
