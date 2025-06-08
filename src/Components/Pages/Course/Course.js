@@ -29,24 +29,89 @@ import Select from "react-select";
 import toast from "react-hot-toast";
 import University from "./University";
 
+// export const customStyles = {
+//   option: (provided, state) => ({
+//     ...provided,
+//     backgroundColor: state.isFocused ? "#8f1409" : "white", // Change hover color
+//     color: state.isFocused ? "white" : "#8f1409", // Change text color on hover
+//     fontFamily: "Metropolis-Medium",
+//     height:'40px'
+//   }),
+//   control: (provided, state) => ({
+//     ...provided,
+//     borderColor: "#8f1409",
+//     height:'40px'
+//   }),
+//   menu: (provided) => ({
+//     ...provided,
+//     zIndex: 9999,
+//     height:'40px'
+//   }),
+// };
 export const customStyles = {
-  option: (provided, state) => ({
-    ...provided,
-    backgroundColor: state.isFocused ? "#8f1409" : "white", // Change hover color
-    color: state.isFocused ? "white" : "#8f1409", // Change text color on hover
-    padding: 10,
-    fontFamily: "Metropolis-Medium",
+  container: (styles) => ({
+    ...styles,
+    width: "100%",
+    marginRight: "20px",
+    fontSize: "16px",
+    color: "#101828",
   }),
-  control: (provided, state) => ({
-    ...provided,
-    margin: "10px 0",
-    borderColor: "#8f1409",
+  control: (styles, { isFocused }) => ({
+    ...styles,
+    backgroundColor: "#FFFFFF",
+    cursor: "pointer",
+    minHeight: "40px", // Set desired height
+    height: "40px",     // Fix height
+    borderRadius: "8px",
+    borderColor: isFocused ? "#8f1409" : "#D0D5DD",
+    boxShadow: "none",
+    ":hover": {
+      borderColor: "#8f1409",
+    },
   }),
-  menu: (provided) => ({
-    ...provided,
+  valueContainer: (styles) => ({
+    ...styles,
+    padding: "2px 8px", // Reduce internal padding
+    height: "40px",     // Align with control height
+  }),
+  menu: (styles) => ({
+    ...styles,
+    backgroundColor: "white",
+    border: "1px solid #D0D5DD",
     zIndex: 9999,
   }),
+  option: (styles, { isFocused }) => ({
+    ...styles,
+    cursor: "pointer",
+    backgroundColor: isFocused ? "#D0D5DD" : "white",
+    color: "#101828",
+    ":hover": {
+      backgroundColor: "grey",
+    },
+    fontSize: "14px",
+  }),
+  placeholder: (styles) => ({
+    ...styles,
+    color: "#667085",
+    fontSize: "14px",
+  }),
+  singleValue: (styles) => ({
+    ...styles,
+    color: "#101828",
+  }),
+  indicatorSeparator: () => ({
+    display: "none",
+  }),
+  dropdownIndicator: (styles) => ({
+    ...styles,
+    color: "#98A2B3",
+    padding: "4px", // make icon more compact
+    ":hover": {
+      color: "#98A2B3",
+    },
+  }),
 };
+
 
 export const countryOptions = [
   { label: "UK", value: "UK" },
