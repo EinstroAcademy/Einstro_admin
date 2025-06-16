@@ -48,3 +48,47 @@
     font-size: 12px;
     font-size: 400;
 }
+
+
+.cancel-btn{
+    width: 170px;
+    height: 40px;
+    background-color: #344054;
+    color: white;
+    font-size: 16px;
+    font-weight: 400;
+    border:none;
+    border-radius: 8px;
+    margin-right: 20px;
+}
+
+
+.cancel-btn:hover{
+    background-color: #2C2F33;
+}
+
+.next-btn{
+    width: 170px;
+    height: 40px;
+    background-color: #850000;;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 400;
+    border:none;
+    border-radius: 8px;
+    margin-right: 20px;
+}
+
+.next-btn:hover{
+    background-color: #dd0e3a;
+}
+
+.qlf-new-btn{
+    width: 140px;
+    height: 40px;
+    border-radius: 8px;
+    background-color: #dd0e3a;
+    border: none;
+    color: #ffffff;
+    font-weight: 500;
+}

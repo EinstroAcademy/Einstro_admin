@@ -45,7 +45,7 @@ function Login() {
   }
   return (
     <div className="container-fluid">
-      <div className="container">
+      <div className="container my-5">
         <div className="row">
           <div className="col-6">
             <div>
@@ -100,6 +100,9 @@ function Login() {
             </div>
           </div>
         </div>
+      </div>
+      <div className='copy-ryt'>
+        © Einstro - Studytez {new Date().getFullYear()}
       </div>
     </div>
   );
