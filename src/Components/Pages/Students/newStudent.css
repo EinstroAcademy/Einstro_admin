@@ -92,3 +92,24 @@
     color: #ffffff;
     font-weight: 500;
 }
+
+.card {
+  border-radius: 12px;
+}
+
+.card-title {
+  font-weight: 600;
+}
+
+.card-text {
+  font-size: 0.95rem;
+}
+
+.school-to-date{
+    width: 150px;
+}
+
+.action-space .edit-icon,.delete-icon {
+    width: 16px;
+    height: 16px;
+}

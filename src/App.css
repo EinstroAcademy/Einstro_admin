@@ -51,7 +51,7 @@ input[type="text"]:focus, textarea:focus,input[type="email"]:focus,input[type="p
 }
 
 input[type="text"]::placeholder, textarea::placeholder,input[type="email"]::placeholder,input[type="phone"]::placeholder {
-  color: #8f1409; /* Placeholder text color */
+  color: rgb(143, 20, 9,0.2); /* Placeholder text color */
   font-family: "Metropolis-Light", sans-serif;
 
 }

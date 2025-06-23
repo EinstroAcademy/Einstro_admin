@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import Layout from '../Layout/Layout'
 import Pagination from 'react-js-pagination';
-import { Table } from 'reactstrap';
+import { Modal, ModalHeader, Table } from 'reactstrap';
 import request from '../../../api/api';
 import { debounce } from 'lodash';
 import { useNavigate } from 'react-router-dom';
+import editImg from '../../../Images/icons/edit.svg'
+import deleteImg from '../../../Images/icons/delete_cross.svg'
 
 function Students() {
   const navigate =useNavigate()
@@ -87,6 +89,7 @@ function Students() {
               <th>Full Name</th>
               <th>Nationality</th>
               <th>Location</th>
+              <th>Action</th>
             </tr>
           </thead>
 
@@ -111,11 +114,11 @@ function Students() {
                     <td>{item?.location}</td>
                     <td className="action-space">
                       
-                      <span className="text-warning" >
-                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                      <span className="text-warning" onClick={()=>navigate('/new/student',{state:{studentId:item._id}})}>
+                        <img src={editImg} className='edit-icon'/>
                       </span>
                       <span className="action-btn" >
-                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                        <img src={deleteImg} className='delete-icon'/>
                       </span>
                       {/* <Popover
                             placement="top"

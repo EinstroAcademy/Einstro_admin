@@ -14,6 +14,7 @@ import MyAccount from "./Components/Pages/MyAccount/MyAccount";
 import Course from "./Components/Pages/Course/Course";
 import Students from "./Components/Pages/Students/Students";
 import NewStudent from "./Components/Pages/Students/NewStudent";
+import "react-datepicker/dist/react-datepicker.css";
 
 function App() {
   const toastOptions = {

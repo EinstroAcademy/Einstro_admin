@@ -459,6 +459,7 @@ function University() {
             <th>S.No</th>
             <th>University Name</th>
             <th>Location</th>
+            <th>Country</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -476,6 +477,7 @@ function University() {
                 <td>{tableOption.skip + idx + 1}</td>
                 <td>{item.name}</td>
                 <td>{item.location}</td>
+                <td>{item.country}</td>
                 <td className="action-space">
                   <span className="text-warning" onClick={() => editUniversity(item)}>
                     <i className="fa fa-pencil" aria-hidden="true"></i>
@@ -668,7 +670,7 @@ function University() {
               
               {/* TinyMCE sections */}
               <div className="col-12 mt-3">
-                <label className="font-semi code-red">Details</label>
+                <label className="font-semi code-red">About University</label>
                 <div>
                   <Tinymce 
                     content={newUniversity.details} 
