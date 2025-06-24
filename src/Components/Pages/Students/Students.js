@@ -109,9 +109,9 @@ function Students() {
                     </td>
                     <td>{item?.studentId}</td>
                     <td>{item?.email}</td>
-                    <td>{item?.fullName}</td>
-                    <td>{item?.nationality}</td>
-                    <td>{item?.location}</td>
+                    <td>{item?.firstName} {item?.lastName}</td>
+                    <td>{item?.country}</td>
+                    <td>{item?.city}</td>
                     <td className="action-space">
                       
                       <span className="text-warning" onClick={()=>navigate('/new/student',{state:{studentId:item._id}})}>
