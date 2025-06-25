@@ -103,7 +103,7 @@ function Students() {
             ) : (
               userList?.map((item, idx) => {
                 return (
-                  <tr className="cursor-pointer">
+                  <tr className="cursor-pointer" onClick={()=>navigate('/student/detail',{state:{studentId:item._id}})}>
                     <td >
                       {tableOption.skip + idx + 1}
                     </td>
