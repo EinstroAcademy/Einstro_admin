@@ -1,8 +1,8 @@
-import dashboard from '../../../Images/icons/dashboard.svg'
-import study from '../../../Images/icons/study.svg'
-import note from '../../../Images/icons/blog.svg'
-import course from '../../../Images/icons/course.svg'
-import student from '../../../Images/icons/student.svg'
+import dashboard from '../../../Images/icons/dashboard_new.svg'
+import study from '../../../Images/icons/abroad_new.svg'
+import note from '../../../Images/icons/blog_new.svg'
+import course from '../../../Images/icons/course_new.svg'
+import student from '../../../Images/icons/student_new.svg'
 
 
 export const SidebarData =[

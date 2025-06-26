@@ -21,6 +21,7 @@ import { useLocation } from 'react-router-dom';
 import request, { NodeURL } from '../../../api/api';
 import Layout from '../Layout/Layout';
 import { buildStyles, CircularProgressbar } from 'react-circular-progressbar';
+import { format } from 'date-fns';
 
 const StudentDetails = () => {
     const userId = useLocation()?.state?.studentId
@@ -278,7 +279,7 @@ const StudentDetails = () => {
                           </tr>
                           <tr>
                             <td><strong>Passport Expiry:</strong></td>
-                            <td>{userData?.passport_expiry_date}</td>
+                            <td>{userData?.passport_expiry_date ? format(new Date(userData?.passport_expiry_date),'dd/MM/yyyy') :''}</td>
                           </tr>
                         </tbody>
                       </Table>
@@ -321,7 +322,7 @@ const StudentDetails = () => {
                                   <p><strong>Grade:</strong> {school?.grade}</p>
                                   <p><strong>School:</strong> {school?.name}</p>
                                   <p><strong>Course:</strong> {school?.course}</p>
-                                  <p><strong>Duration:</strong> {school?.from} - {school?.to}</p>
+                                  <p><strong>Duration:</strong> {school?.from ? format(new Date(school?.from),'dd/MM/yyyy') :''} - {school?.to ? format(new Date(school?.to),'dd/MM/yyyy') :''}</p>
                                 </Col>
                                 <Col md={6}>
                                   <p><strong>Score:</strong> {school?.score} ({school?.cgpa_level})</p>
@@ -338,34 +339,39 @@ const StudentDetails = () => {
                         <h5>English Proficiency Test</h5>
                         <Card>
                           <CardBody>
-                            <Row>
+                            {
+                              userData?.englishTest?.map((test)=>{
+                                return <Row>
                               <Col md={6}>
-                                <p><strong>Test:</strong> {userData?.englishTest?.test}</p>
-                                <p><strong>Overall Score:</strong> {userData?.englishTest?.overallScore}</p>
+                                <p><strong>Test:</strong> {test?.test}</p>
+                                <p><strong>Overall Score:</strong> {test?.overallScore}</p>
                               </Col>
                               <Col md={6}>
                                 <Table size="sm">
                                   <tbody>
                                     <tr>
                                       <td><strong>Listening:</strong></td>
-                                      <td>{userData?.englishTest?.listening}</td>
+                                      <td>{test?.listening}</td>
                                     </tr>
                                     <tr>
                                       <td><strong>Reading:</strong></td>
-                                      <td>{userData?.englishTest?.reading}</td>
+                                      <td>{test?.reading}</td>
                                     </tr>
                                     <tr>
                                       <td><strong>Speaking:</strong></td>
-                                      <td>{userData?.englishTest?.speaking}</td>
+                                      <td>{test?.speaking}</td>
                                     </tr>
                                     <tr>
                                       <td><strong>Writing:</strong></td>
-                                      <td>{userData?.englishTest?.writing}</td>
+                                      <td>{test?.writing}</td>
                                     </tr>
                                   </tbody>
                                 </Table>
                               </Col>
                             </Row>
+                              })
+                            }
+                            
                           </CardBody>
                         </Card>
                       </div>

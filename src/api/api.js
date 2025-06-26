@@ -30,7 +30,7 @@ const request = (options) => {
     if (response?.data?.status === '00') {
       localStorage.removeItem('ESA-admin');
       localStorage.removeItem('adminData');
-      window.location = '/admin';
+      window.location = '/';
     }
     return response.data; // This in turn returns the data from the server when status is 1
   };

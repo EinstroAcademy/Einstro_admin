@@ -7,10 +7,13 @@ import study from '../../../Images/icons/study.svg'
 import note from '../../../Images/icons/blog.svg'
 import course from '../../../Images/icons/course.svg'
 import { SidebarData } from './SidebarData';
+import { Tooltip, UncontrolledTooltip } from 'reactstrap';
 
 
 
 function Sidebar() {
+  const [tooltipOpen, setTooltipOpen] = useState(false);
+  const toggle = () => setTooltipOpen(!tooltipOpen);
    const [sidebarMenu, setSidebarMenu] = useState([]);
   const [activeMenu, setActiveMenu] = useState("");
   const location = useLocation();
@@ -37,25 +40,22 @@ function Sidebar() {
       </div>
     <section className={`sidebar`}>
     <ul className="sidebar-menu">
-      {SidebarData.map((item) => {
-        return (
-          <>
-            <Link to={item.link} className="sb-link">
-              <li
-              title={item?.navItem}
-                  onClick={() => setActiveMenu(item.id)}
-                  >
-                <div className={`side-menu-box ${item.id === activeMenu ? "active" : ""}`}>
-
-                <img src={item.img}/>
-                </div>
-                {/* <span>{item.name}</span> */}
-              </li>
-            </Link>
-          </>
-        );
-      })}
-    </ul>
+  {SidebarData.map((item) => (
+    <li key={item.id} id={`menu-item-${item.id}`} onClick={() => setActiveMenu(item.id)}>
+      <Link to={item.link} className="sb-link">
+        <div className={`side-menu-box ${item.id === activeMenu ? "active" : ""}`}>
+          <img src={item.img} alt={item.navItem} />
+        </div>
+      </Link>
+      <UncontrolledTooltip
+        placement="right"
+        target={`menu-item-${item.id}`}
+      >
+        {item.navItem}
+      </UncontrolledTooltip>
+    </li>
+  ))}
+</ul>
   </section>
     </>
   )

@@ -112,7 +112,7 @@ function Students() {
                     <td>{item?.firstName} {item?.lastName}</td>
                     <td>{item?.country}</td>
                     <td>{item?.city}</td>
-                    <td className="action-space">
+                    <td className="action-space" onClick={(e)=>e.stopPropagation()}>
                       
                       <span className="text-warning" onClick={()=>navigate('/new/student',{state:{studentId:item._id}})}>
                         <img src={editImg} className='edit-icon'/>

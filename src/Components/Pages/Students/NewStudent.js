@@ -477,11 +477,13 @@ function NewStudent() {
   const [activeTab, setActiveTab] = useState(1);
   const [isQualification, setIsQualification] = useState(false);
   const [isSchool, setIschool] = useState(false);
+  const [isEnglishTest, setIsEnglishTest] = useState(false)
   const [isEditMode, setIsEditMode] = useState(false);
   const [saveStudentId, setSaveStudentId] = useState('')
   const [studentDetails, setStudentDetails] = useState({})
   const [selectedQualification, setSelectedQualification] = useState(null);
   const [selectedSchool, setSelectedSchool] = useState(null);
+  const [selectedTest, setSelectedTest] = useState(null);
   const [isQualificationOpen, setIsQualificationOpen] = useState(false);
   const [uploadedFiles, setUploadedFiles] = useState({});
   const [uploadProgress, setUploadProgress] = useState({});
@@ -490,6 +492,7 @@ function NewStudent() {
   const [showSuccess, setShowSuccess] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [schoolDeleteConfirm, setSchoolDeleteConfirm] = useState(false);
+  const [testDeleteConfirm, setTestDeleteConfirm] = useState(false);
 const [deleteIndex, setDeleteIndex] = useState(null);
   const [newStudent, setNewStudent] = useState({
     firstName: "",
@@ -533,6 +536,16 @@ const [deleteIndex, setDeleteIndex] = useState(null);
     to: ''
   });
 
+  const [englishTest, setEnglishTest] = useState({
+        test:  '',
+        overallScore:  '',
+        reading:'',
+        listening: '',
+        speaking:'',
+        writing:'',
+        overallScore:''
+    })
+
   useEffect(() => {
     if (location?.state?.studentId) {
       setSaveStudentId(location?.state?.studentId)
@@ -558,6 +571,11 @@ const [deleteIndex, setDeleteIndex] = useState(null);
   const handleSchoolChange = (field, value) => {
     setSchool(prev => ({ ...prev, [field]: value }));
   };
+
+  const handleEnglishTestChange = (name, e) => {
+        setEnglishTest({ ...englishTest, [name]: e })
+    }
+
 
   const handleSaveNewStudent = () => {
     const requiredFields = [
@@ -842,6 +860,13 @@ const [deleteIndex, setDeleteIndex] = useState(null);
     setSchool(detail)
   }
 
+    const onEditEnglishTest = (detail) => {
+    console.log(detail)
+    setIsEnglishTest(!isEnglishTest)
+    setIsEditMode(true)
+    setEnglishTest(detail)
+  }
+
   const handleFileUpload = (docType, file) => {
     if (file) {
       // Simulate upload progress
@@ -987,6 +1012,13 @@ const handleSchoolDeleteClick = (school, index) => {
 };
 
 
+const handleTestDeleteClick = (school, index) => {
+  setSelectedTest(school);
+  setDeleteIndex(index);
+  setTestDeleteConfirm(true);
+};
+
+
 const confirmDelete = () => {
   if (deleteIndex !== null) {
     request({
@@ -1032,6 +1064,50 @@ const confirmSchoolDelete = () => {
     // toast.success('Qualification deleted successfully');
   }
 };
+
+const confirmTestDelete = () => {
+  if (deleteIndex !== null) {
+    request({
+      url:'/admin/user/remove/test',
+      method:'POST',
+      data:{
+        testId:selectedTest?._id,
+        userId:saveStudentId
+      }
+    }).then((res)=>{
+      if(res.status===1){
+        setDeleteIndex('')
+        setTestDeleteConfirm(false)
+        setSelectedTest({})
+        toast.success('Test deleted successfully');
+        getStudentDetails()
+       }
+    })
+    // Optional: Show success message
+    // toast.success('Qualification deleted successfully');
+  }
+};
+
+
+const handleSubmitEnglishTest =()=>{
+  request({
+    url:'/admin/update/user/english/test',
+    method:'POST',
+    data:{
+      ...englishTest,
+      userId:saveStudentId
+    }
+  }).then((res)=>{
+    if(res.status===1){
+      toast.success("Exam details updated successfully");
+      setIsEnglishTest(false)
+      getStudentDetails()
+    }
+    if(res.status===0){
+      toast.error(res.message);
+    }
+  })
+}
 
 
   return (
@@ -1414,6 +1490,7 @@ const confirmSchoolDelete = () => {
                               <CardText><strong>Country:</strong> {detail?.country}</CardText>
                               <CardText><strong>Grade Scheme:</strong> {detail?.cgpa_level}</CardText>
                               <CardText><strong>Score:</strong> {detail?.score}</CardText>
+                              <CardText><strong>Duration:</strong> {detail?.from ? format(new Date(detail?.from),'yyyy') :''} - {detail?.to ? format(new Date(detail?.to),'yyyy') :''}</CardText>
                             </Col>
                             <Col md={6}>
                               <CardText><strong>Language of Instruction:</strong> {detail?.medium}</CardText>
@@ -1456,6 +1533,42 @@ const confirmSchoolDelete = () => {
                               value={qualificationOption.find(op => op.value === qualification?.degree)}
                               onChange={(e) => handleQualificationChange('degree', e.value)}
                             />
+                          </FormGroup>
+                        </Col>
+                        <Col md={3} lg={3}>
+                          <FormGroup>
+                            <Label>From Date</Label>
+                            <div>
+                              <DatePicker
+                                selected={qualification?.from ? new Date(qualification?.from) : ''}
+                                placeholderText="Select From Date"
+                                dateFormat="dd/MM/yyyy"
+                                showYearDropdown
+                                scrollableYearDropdown
+                                yearDropdownItemNumber={100}
+                                className="school-to-date"
+                                maxDate={new Date()}
+                                onChange={(e) => handleQualificationChange('from', e)}
+                              />
+                            </div>
+                          </FormGroup>
+                        </Col>
+                        <Col md={3} lg={3}>
+                          <FormGroup>
+                            <Label>To Date</Label>
+                            <div>
+                              <DatePicker
+                                selected={qualification?.to ? new Date(qualification?.to) : ''}
+                                placeholderText="Select To Date"
+                                dateFormat="dd/MM/yyyy"
+                                showYearDropdown
+                                scrollableYearDropdown
+                                yearDropdownItemNumber={100}
+                                maxDate={new Date()}
+                                className="school-to-date"
+                                onChange={(e) => handleQualificationChange('to', e)}
+                              />
+                            </div>
                           </FormGroup>
                         </Col>
                         <Col md={6}>
@@ -1821,6 +1934,299 @@ const confirmSchoolDelete = () => {
                   <Button
                     color="danger"
                     onClick={confirmSchoolDelete}
+                  >
+                    Yes, Delete
+                  </Button>
+                </ModalFooter>
+              </Modal>
+            </div>
+          </TabPane>
+          <TabPane tabId={4}>
+            <div className="container-fluid">
+              <div>
+                <button className="qlf-new-btn" onClick={() => setIsEnglishTest(!isEnglishTest)}>
+                  <img src={addPlus} />
+                  Add New
+                </button>
+                <div className="my-5">
+                  {
+                    newStudent?.englishTest?.length > 0 && newStudent?.englishTest?.map((data,indx) => {
+                      return (
+                        <div className="card shadow-sm p-3 mb-3">
+                          <h6 className="fw-bold mb-2">
+                            {data.test} -
+                            {data.exam_date
+                              ? new Date(data.exam_date).toLocaleDateString()
+                              : "—"}
+                          </h6>
+                          <h6 className="fw-bold mb-2">
+                            Over all score - 
+                            {data?.overallScore}
+                          </h6>
+                          <div className="row">
+                            <div className="col-md-6">
+                              <p className="mb-1">
+                                <strong>Listening:</strong> {data.listening}
+                              </p>
+                              <p className="mb-1">
+                                <strong>Reading:</strong> {data.reading}
+                              </p>
+                            </div>
+                            <div className="col-md-6">
+                              <p className="mb-1">
+                                <strong>Writing:</strong> {data.writing}
+                              </p>
+                              <p className="mb-1">
+                                <strong>Speaking:</strong> {data.speaking}
+                              </p>
+                            </div>
+                          </div>
+                          <div className="d-flex justify-content-end gap-2 mt-3">
+                            <Button color="primary" size="sm" onClick={() => onEditEnglishTest(data)}>Edit</Button>
+                            <Button color="danger" size="sm" onClick={()=>handleTestDeleteClick(data,indx)}>Delete</Button>
+                          </div>
+                        </div>
+                      );
+                    })
+                  }
+
+                </div>
+              </div>
+              <Modal
+                isOpen={isEnglishTest}
+                toggle={() => setIsEnglishTest(!isEnglishTest)}
+                centered
+                size="lg"
+              >
+                <ModalHeader
+                  toggle={() => setIsEnglishTest(!isEnglishTest)}
+                >
+                  {isEditMode ? 'Edit Test' : 'Add Test'}
+                </ModalHeader>
+                <ModalBody>
+                  <div className='container'>
+                    <div className='my-3'>
+                      <Row>
+                        <Col md={6}>
+                          <FormGroup>
+                            <Label for="fullName">Grade Level</Label>
+                            <Select
+                              styles={customStyles}
+                              options={englishTestOption}
+                              value={englishTestOption.find(op => op.value === englishTest?.test)}
+                              onChange={(e) => handleEnglishTestChange('test', e.value)}
+                            />
+                          </FormGroup>
+                        </Col>
+                        <Col md={3} lg={3}>
+                          <FormGroup>
+                            <Label>Exam Date</Label>
+                            <div>
+                              <DatePicker
+                                selected={englishTest?.exam_date ? new Date(englishTest?.exam_date) : ''}
+                                placeholderText="Select From Date"
+                                dateFormat="dd/MM/yyyy"
+                                showYearDropdown
+                                scrollableYearDropdown
+                                yearDropdownItemNumber={100}
+                                className="school-to-date"
+                                maxDate={new Date()}
+                                onChange={(e) => handleEnglishTestChange('exam_date', e)}
+                              />
+                            </div>
+                          </FormGroup>
+                        </Col>
+                         <Col md={6}>
+                          <FormGroup>
+                            <Label >Overall Score</Label>
+                            <Input type="text"
+                             value={englishTest?.overallScore}
+                              placeholder="Overall Score"
+                              onChange={(e) => handleEnglishTestChange('overallScore', e.target.value)}
+                            />
+                          </FormGroup>
+                        </Col>
+                      </Row>
+                      <hr />
+                      <Row>
+                        <Col md={6}>
+                          <FormGroup>
+                            <Label >Listening Score</Label>
+                            <Input
+                              type="text"
+                              value={englishTest?.listening}
+                              placeholder="Listening"
+                              onChange={(e) => handleEnglishTestChange('listening', e.target.value)}
+                            />
+                          </FormGroup>
+                        </Col>
+                        <Col md={6}>
+                          <FormGroup>
+                            <Label >Reading</Label>
+                            <Input type="text"
+                             value={englishTest?.reading}
+                              placeholder="Reading"
+                              onChange={(e) => handleEnglishTestChange('reading', e.target.value)}
+                            />
+                          </FormGroup>
+                        </Col>
+                        <Col md={6}>
+                          <FormGroup>
+                            <Label >Writing</Label>
+                            <Input type="text"
+                             value={englishTest?.writing}
+                              placeholder="Reading"
+                              onChange={(e) => handleEnglishTestChange('writing', e.target.value)}
+                            />
+                          </FormGroup>
+                        </Col>
+                        <Col md={6}>
+                          <FormGroup>
+                            <Label >Speaking</Label>
+                            <Input type="text"
+                             value={englishTest?.speaking}
+                              placeholder="Reading"
+                              onChange={(e) => handleEnglishTestChange('speaking', e.target.value)}
+                            />
+                          </FormGroup>
+                        </Col>
+                      </Row>
+                      <hr />
+                      <div className="d-flex gap-3 mt-4">
+                        <Button className='discard-btn'
+                          onClick={() => setIsEnglishTest(!isEnglishTest)}
+                        >Discard</Button>
+                        <Button className='save-btn'
+                          onClick={handleSubmitEnglishTest}
+                        >{isEditMode ? 'Update' : 'Save'}</Button>
+                      </div>
+                    </div>
+
+
+
+                  </div>
+                </ModalBody>
+              </Modal>
+              <Modal
+                isOpen={showDeleteConfirm}
+                toggle={() => setShowDeleteConfirm(false)}
+                centered
+                size="sm"
+              >
+                <ModalHeader toggle={() => setShowDeleteConfirm(false)}>
+                  Confirm Delete
+                </ModalHeader>
+                <ModalBody>
+                  <div className="text-center">
+                    <div className="mb-3">
+                      <i className="fas fa-exclamation-triangle text-warning" style={{ fontSize: '3rem' }}></i>
+                    </div>
+                    <h5>Are you sure?</h5>
+                    <p className="text-muted">
+                      Do you want to delete this qualification? This action cannot be undone.
+                    </p>
+                    {selectedQualification && (
+                      <div className="alert alert-light mt-3">
+                        <strong>{selectedQualification.degree} - {selectedQualification.course}</strong><br />
+                        <small className="text-muted">{selectedQualification.university}</small>
+                      </div>
+                    )}
+                  </div>
+                </ModalBody>
+                <ModalFooter>
+                  <Button
+                    color="secondary"
+                    onClick={() => setShowDeleteConfirm(false)}
+                  >
+                    No, Cancel
+                  </Button>
+                  <Button
+                    color="danger"
+                    onClick={confirmDelete}
+                  >
+                    Yes, Delete
+                  </Button>
+                </ModalFooter>
+              </Modal>
+              <Modal
+                isOpen={schoolDeleteConfirm}
+                toggle={() => setShowDeleteConfirm(false)}
+                centered
+                size="sm"
+              >
+                <ModalHeader toggle={() => setShowDeleteConfirm(false)}>
+                  Confirm Delete
+                </ModalHeader>
+                <ModalBody>
+                  <div className="text-center">
+                    <div className="mb-3">
+                      <i className="fas fa-exclamation-triangle text-warning" style={{ fontSize: '3rem' }}></i>
+                    </div>
+                    <h5>Are you sure?</h5>
+                    <p className="text-muted">
+                      Do you want to delete this School? This action cannot be undone.
+                    </p>
+                    
+                    {selectedSchool && (
+                      <div className="alert alert-light mt-3">
+                        <strong>{selectedSchool.name} - {selectedSchool.course}</strong><br />
+                        {/* <small className="text-muted">{selectedSchool.name}</small> */}
+                      </div>
+                    )}
+                  </div>
+                </ModalBody>
+                <ModalFooter>
+                  <Button
+                    color="secondary"
+                    onClick={() => setSchoolDeleteConfirm(false)}
+                  >
+                    No, Cancel
+                  </Button>
+                  <Button
+                    color="danger"
+                    onClick={confirmSchoolDelete}
+                  >
+                    Yes, Delete
+                  </Button>
+                </ModalFooter>
+              </Modal>
+              <Modal
+                isOpen={testDeleteConfirm}
+                toggle={() => setTestDeleteConfirm(false)}
+                centered
+                size="sm"
+              >
+                <ModalHeader toggle={() => setTestDeleteConfirm(false)}>
+                  Confirm Delete
+                </ModalHeader>
+                <ModalBody>
+                  <div className="text-center">
+                    <div className="mb-3">
+                      <i className="fas fa-exclamation-triangle text-warning" style={{ fontSize: '3rem' }}></i>
+                    </div>
+                    <h5>Are you sure?</h5>
+                    <p className="text-muted">
+                      Do you want to delete this Test? This action cannot be undone.
+                    </p>
+                    
+                    {selectedTest && (
+                      <div className="alert alert-light mt-3">
+                        <strong>{selectedTest.test}</strong><br />
+                        {/* <small className="text-muted">{selectedSchool.name}</small> */}
+                      </div>
+                    )}
+                  </div>
+                </ModalBody>
+                <ModalFooter>
+                  <Button
+                    color="secondary"
+                    onClick={() => setTestDeleteConfirm(false)}
+                  >
+                    No, Cancel
+                  </Button>
+                  <Button
+                    color="danger"
+                    onClick={confirmTestDelete}
                   >
                     Yes, Delete
                   </Button>
