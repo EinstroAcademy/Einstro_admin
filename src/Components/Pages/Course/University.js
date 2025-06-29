@@ -77,6 +77,21 @@ export const currencyOption = [
   },
 ];
 
+
+const monthOptions = [
+  { value: 'Jan', label: 'January' },
+  { value: 'Feb', label: 'February' },
+  { value: 'Mar', label: 'March' },
+  { value: 'April', label: 'April' },
+  { value: 'May', label: 'May' },
+  { value: 'June', label: 'June' },
+  { value:'July', label: 'July' },
+  { value: 'July', label: 'August' },
+  { value: 'Sep', label: 'September' },
+  { value: 'Oct', label: 'October' },
+  { value: 'Nov', label: 'November' },
+  { value: 'Dec', label: 'December' }
+];
 function University() {
   const [pages, setPages] = useState("");
   const [activePage, setActivePage] = useState(1);
@@ -106,8 +121,11 @@ function University() {
     removedImages: [],
     cost: '',
     scholarship: '',
-    requirements: ''
+    requirements: '',
+    intake_month:[]
   });
+
+  console.log(newUniversity)
 
   const [tableOption, setTableOption] = useState({
     search: "",
@@ -201,6 +219,7 @@ function University() {
     // Create a copy to avoid mutating state
     const universityData = { ...newUniversity };
     universityData.currency = JSON.stringify(universityData.currency);
+    universityData.intake_month = JSON.stringify((universityData?.intake_month))
 
     // Append all fields except images first
     Object.entries(universityData).forEach(([key, value]) => {
@@ -263,6 +282,7 @@ function University() {
     const universityData = { ...newUniversity };
     universityData.currency = JSON.stringify(universityData.currency);
     universityData.images = JSON.stringify(universityData.images);
+    universityData.intake_month = JSON.stringify((universityData?.intake_month))
     
     if (universityData?.removedImages?.length > 0) {
       universityData.removedImages = JSON.stringify(universityData.removedImages);
@@ -630,6 +650,23 @@ function University() {
                     options={currencyOption}
                     value={currencyOption.filter(op => op.value.country === newUniversity?.currency?.country)}
                     onChange={(e) => setNewUniversity({ ...newUniversity, currency: e.value })}
+                  />
+                </div>
+              </div>
+              <div className="col-6">
+                <label className="font-semi code-red">Currency</label>
+                <div>
+                  <Select
+                    options={monthOptions}
+                     styles={customStyles}
+                    isMulti
+                    value={monthOptions?.filter((li) => {
+                      return newUniversity?.intake_month?.some((op) => {
+                        return op === li?.value
+                      })
+                    })}
+                    onChange={(e)=>setNewUniversity({...newUniversity,intake_month:e.map((li)=>li.value)})}
+                    placeholder="Select months"
                   />
                 </div>
               </div>
