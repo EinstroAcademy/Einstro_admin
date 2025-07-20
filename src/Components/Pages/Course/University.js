@@ -654,7 +654,7 @@ function University() {
                 </div>
               </div>
               <div className="col-6">
-                <label className="font-semi code-red">Currency</label>
+                <label className="font-semi code-red">Intake Months</label>
                 <div>
                   <Select
                     options={monthOptions}
