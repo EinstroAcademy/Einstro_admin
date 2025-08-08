@@ -86,7 +86,7 @@ const monthOptions = [
   { value: 'May', label: 'May' },
   { value: 'June', label: 'June' },
   { value:'July', label: 'July' },
-  { value: 'July', label: 'August' },
+  { value: 'Aug', label: 'August' },
   { value: 'Sep', label: 'September' },
   { value: 'Oct', label: 'October' },
   { value: 'Nov', label: 'November' },
@@ -122,7 +122,10 @@ function University() {
     cost: '',
     scholarship: '',
     requirements: '',
-    intake_month:[]
+    intake_month:[],
+    startingFee: '',
+    englishTests: [],
+    acceptanceRate: '',
   });
 
   console.log(newUniversity)
@@ -182,6 +185,17 @@ function University() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    // For acceptanceRate, ensure only numbers between 0 and 100
+    if (name === 'acceptanceRate') {
+      let val = value;
+      if (val === '') {
+        setNewUniversity({ ...newUniversity, acceptanceRate: '' });
+        return;
+      }
+      val = Math.max(0, Math.min(100, Number(val)));
+      setNewUniversity({ ...newUniversity, acceptanceRate: val });
+      return;
+    }
     setNewUniversity({
       ...newUniversity,
       [name]: value
@@ -189,7 +203,7 @@ function University() {
   };
 
   const validateForm = () => {
-    const { name, location, country, currency, rank, costOfLiving, students, details } = newUniversity;
+    const { name, location, country, currency, rank, costOfLiving, students, details, acceptanceRate } = newUniversity;
     
     const validations = [
       { field: name, message: "Name required" },
@@ -199,11 +213,12 @@ function University() {
       { field: rank, message: "Rank required" },
       { field: costOfLiving, message: "Cost of Living required" },
       { field: students, message: "Students required" },
-      { field: details, message: "Details required" }
+      { field: details, message: "Details required" },
+      { field: acceptanceRate, message: "Acceptance Rate required" },
     ];
 
     for (const validation of validations) {
-      if (!validation.field || validation.field === "") {
+      if (!validation.field && validation.field !== 0) {
         toast.error(validation.message);
         return false;
       }
@@ -283,6 +298,7 @@ function University() {
     universityData.currency = JSON.stringify(universityData.currency);
     universityData.images = JSON.stringify(universityData.images);
     universityData.intake_month = JSON.stringify((universityData?.intake_month))
+    universityData.englishTests = JSON.stringify((universityData?.englishTests))
     
     if (universityData?.removedImages?.length > 0) {
       universityData.removedImages = JSON.stringify(universityData.removedImages);
@@ -407,7 +423,11 @@ function University() {
       removedImages: [],
       cost: '',
       scholarship: '',
-      requirements: ''
+      requirements: '',
+      intake_month: [],
+      startingFee: '',
+      englishTests: [],
+      acceptanceRate: '',
     });
     setSelectedImages([]);
   };
@@ -592,6 +612,18 @@ function University() {
                 </div>
               </div>
               <div className="col-6">
+                <label className="font-semi code-red">Starting Fee</label>
+                <div>
+                  <input
+                    type="text"
+                    className="login-input"
+                    name="startingFee"
+                    value={newUniversity.startingFee}
+                    onChange={handleChange}
+                  />
+                </div>
+              </div>
+              <div className="col-6">
                 <label className="font-semi code-red">International Students</label>
                 <div>
                   <input
@@ -628,6 +660,21 @@ function University() {
                 </div>
               </div>
               <div className="col-6">
+                <label className="font-semi code-red">Acceptance Rate (%)</label>
+                <div>
+                  <input
+                    type="text"
+                    className="login-input"
+                    name="acceptanceRate"
+                    value={newUniversity.acceptanceRate}
+                    onChange={handleChange}
+                    min="0"
+                    max="100"
+                    placeholder="e.g. 75"
+                  />
+                </div>
+              </div>
+              <div className="col-6">
                 <label className="font-semi code-red">Country</label>
                 <div>
                   <Select
@@ -658,7 +705,6 @@ function University() {
                 <div>
                   <Select
                     options={monthOptions}
-                     styles={customStyles}
                     isMulti
                     value={monthOptions?.filter((li) => {
                       return newUniversity?.intake_month?.some((op) => {
@@ -667,6 +713,35 @@ function University() {
                     })}
                     onChange={(e)=>setNewUniversity({...newUniversity,intake_month:e.map((li)=>li.value)})}
                     placeholder="Select months"
+                  />
+                </div>
+              </div>
+              <div className="col-6">
+                <label className="font-semi code-red">English Test</label>
+                <div>
+                  <Select
+                    isMulti
+                    options={[
+                      { value: 'IELTS', label: 'IELTS' },
+                      { value: 'TOEFL', label: 'TOEFL' },
+                      { value: 'PTE', label: 'PTE' },
+                      { value: 'Duolingo', label: 'Duolingo' },
+                      { value: 'Cambridge', label: 'Cambridge' },
+                      { value: 'OET', label: 'OET' }
+                    ]}
+                    value={[
+                      { value: 'IELTS', label: 'IELTS' },
+                      { value: 'TOEFL', label: 'TOEFL' },
+                      { value: 'PTE', label: 'PTE' },
+                      { value: 'Duolingo', label: 'Duolingo' },
+                      { value: 'Cambridge', label: 'Cambridge' },
+                      { value: 'OET', label: 'OET' }
+                    ].filter(opt => (newUniversity.englishTests || []).includes(opt.value))}
+                    onChange={selected => setNewUniversity({
+                      ...newUniversity,
+                      englishTests: selected ? selected.map(opt => opt.value) : []
+                    })}
+                    placeholder="Select English Tests"
                   />
                 </div>
               </div>

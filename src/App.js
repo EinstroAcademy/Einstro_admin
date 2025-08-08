@@ -5,6 +5,7 @@ import Register from "./Components/Pages/Login&Register/Register";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import Dashboard from "./Components/Pages/Dashboard/Dashboard";
 import Abroad from "./Components/Pages/Abroad/Abroad";
+import AddAbroad from "./Components/Pages/Abroad/AddAbroad";
 import Blog from "./Components/Pages/Blog/Blog";
 import ForgotPassword from "./Components/Pages/Login&Register/ForgotPassword";
 import VerifyOtp from "./Components/Pages/Login&Register/VerifyOtp";
@@ -68,6 +69,7 @@ function App() {
           <Route path="/reset/password" element={<ResetPassword />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/abroad" element={<Abroad />} />
+          <Route path="/abroad/add" element={<AddAbroad />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/students" element={<Students />} />
           <Route path="/new/student" element={<NewStudent />} />

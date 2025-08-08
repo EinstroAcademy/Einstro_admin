@@ -1,0 +1,41 @@
+.abroad-header {
+  margin-bottom: 1rem;
+}
+
+
+.abroad-table-wrap {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  padding: 1.5rem;
+}
+
+.abroad-table thead tr {
+  background: var(--bg-color, #f3f5ff);
+  color: var(--text-color, #8d9eff);
+}
+
+.abroad-table th, .abroad-table td {
+  vertical-align: middle;
+  font-size: 1rem;
+}
+
+.action-space span {
+  cursor: pointer;
+  margin-right: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.action-space .fa-eye {
+  color: #1976d2;
+}
+.action-space .fa-pencil {
+  color: #fbc02d;
+}
+.action-space .fa-trash-o {
+  color: #e53935;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}

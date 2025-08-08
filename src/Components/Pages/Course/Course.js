@@ -110,6 +110,10 @@ export const customStyles = {
       color: "#98A2B3",
     },
   }),
+  menuPortal: (styles) => ({
+  ...styles,
+  zIndex: 9999,
+}),
 };
 
 
