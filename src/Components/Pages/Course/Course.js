@@ -28,6 +28,7 @@ import Tinymce from "../../Tinymce/Tinymce";
 import Select from "react-select";
 import toast from "react-hot-toast";
 import University from "./University";
+import PopularCourse from "../PopularCourse/PopularCourse";
 
 // export const customStyles = {
 //   option: (provided, state) => ({
@@ -400,7 +401,7 @@ function Course() {
   const handleEditBlog = () => {
     const {
       title,
-      university,
+      universityId,
       location,
       rank,
       fees,
@@ -416,7 +417,7 @@ function Course() {
     if (title === "") {
       return toast.error("Title required");
     }
-    if (university === "") {
+    if (universityId === "") {
       return toast.error("University required");
     }
     if (location === "") {
@@ -557,6 +558,16 @@ const deleteCourse=(e,item)=>{
                 University
               </NavLink>
             </NavItem>
+            <NavItem>
+              <NavLink
+                className={`${activeTab === "6" ? "active" : ""}`}
+                onClick={() => {
+                  toggle("6");
+                }}
+              >
+                Popular Courses
+              </NavLink>
+            </NavItem>
           </Nav>
         </div>
       </div>
@@ -689,6 +700,9 @@ const deleteCourse=(e,item)=>{
         </TabPane>
         <TabPane tabId="5">
           <University />
+        </TabPane>
+        <TabPane tabId="6">
+          <PopularCourse/>
         </TabPane>
       </TabContent>
       <Modal

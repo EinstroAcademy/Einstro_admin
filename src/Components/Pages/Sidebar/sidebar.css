@@ -15,7 +15,7 @@
 
   .sidebar .sidebar-menu {
     margin: 0;
-    padding: 115px 0 20px;
+    padding: 80px 0 20px;
     list-style: none;
     height: calc(100vh - 30px);
     max-height: 100%;
@@ -38,7 +38,7 @@
     justify-content: center;
     gap: 16px;
     padding: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 8px;
     cursor: pointer;
     max-height: 38px;
     min-height: 38px;
@@ -72,10 +72,10 @@
   }
   
   .sidebar .sidebar-menu li img {
-    width: 24px;
-    min-width: 24px;
+    width: 18px;
+    min-width: 18px;
     max-width: 24px;
-    margin-left: 3px;
+    /* margin-left: 3px; */
   }
   
   .sidebar .sidebar-menu li span {
@@ -109,13 +109,15 @@
   }
 
   .side-menu-box{
-    width: 48px;
-    height: 48px;
+    width: 32px;
+    height: 32px;
     background-color:rgb(248, 248, 248);
+    display: flex;
+    justify-content: center;
     align-items: center ;
     text-align: center;
     border-radius: 8px;
-    padding: 12px;
+    padding: 4px;
 }
 
 .side-menu-box:hover{

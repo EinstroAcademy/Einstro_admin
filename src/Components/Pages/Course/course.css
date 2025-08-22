@@ -1,6 +1,6 @@
 #courseTabs {
     display: inline-flex;
-    justify-content: space-around;
+    justify-content: flex-start;
     padding: 6px;
     width: 80%;
     background: white;
@@ -16,6 +16,7 @@
     cursor: pointer;
     border: none;
     border-radius: 10px;
+    margin:0px 12px  ;
   }
   
   #courseTabs .nav-link.active{
