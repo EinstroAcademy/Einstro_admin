@@ -160,6 +160,14 @@ function Branch() {
 
   return (
     <div className="mybookings-table-wrap mt-4">
+      <div>
+        <input
+          className=""
+          type="text"
+          onChange={(e) => search(e.target.value)}
+          placeholder='Search Branch'
+        />
+      </div>
     <div className='text-end mb-3'>
       <button className="add_blog_btn" onClick={()=>setIsBranch(!isBranch)}> Add Branch</button>
     </div>

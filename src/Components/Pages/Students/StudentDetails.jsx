@@ -14,19 +14,27 @@ import {
   Badge,
   Table,
   Button,
-  Progress
+  Progress,
+  Modal,
+  ModalHeader,
+  ModalBody
 } from 'reactstrap';
-import { User, FileText, GraduationCap, Globe, Settings, CheckCircle, Clock, XCircle } from 'lucide-react';
+import { User, FileText, GraduationCap, Globe, Settings, CheckCircle, Clock, XCircle, CheckCheck, X, Eye, Download } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
 import request, { NodeURL } from '../../../api/api';
 import Layout from '../Layout/Layout';
 import { buildStyles, CircularProgressbar } from 'react-circular-progressbar';
 import { format } from 'date-fns';
+import { saveAs } from "file-saver";
+import axios from 'axios';
+import toast from 'react-hot-toast';
 
 const StudentDetails = () => {
     const userId = useLocation()?.state?.studentId
   const [activeTab, setActiveTab] = useState('1');
   const [userData, setuserData] = useState({});
+  const [url,setUrl] = useState('')
+  const [viewImage,setViewImage] =useState(false)
   const [completion,setCompletion] = useState({
     overall:0
   })
@@ -83,6 +91,47 @@ const StudentDetails = () => {
     }
   },[userId])
 
+  const onViewImage = (link) =>{
+    setUrl(link)
+    setViewImage(true)
+  }
+
+  const downloadFile = async (link,filename) => {
+  try {
+    const fileUrl = link;
+
+    // Fetch file as a blob
+    const response = await axios.get(`${NodeURL}/${fileUrl}`, {
+      responseType: "blob", // important for binary files
+    });
+
+    // Save the file
+    saveAs(response.data, filename); // second arg = download name
+  } catch (error) {
+    console.error("Download failed:", error);
+  }
+};
+
+const approveImage = (status,filename)=>{
+      request({
+        url:'/admin/user/approve/image',
+        method:"POST",
+        data:{
+          filename,
+          userId:userId,
+          status
+        }
+      }).then((res)=>{
+        if(res.status===0){
+          toast.error(res.message)
+        }
+        if(res.status===1){
+          toast.success(res.message)
+          getUser()
+        }
+      })
+   
+  }
   return (
    <Layout>
      <Container fluid className="py-4">
@@ -400,7 +449,15 @@ const StudentDetails = () => {
 
                 {/* Documents Tab */}
                 <TabPane tabId="3">
-                  <h5>Document Verification Status</h5>
+                  <div className='d-flex justify-content-between align-items-center mb-3'>
+                      <h5>Document Verification Status</h5>
+                      <div>
+                        <button className='me-2 btn btn-sm btn-outline-success'><CheckCheck width={'16px'} height={'16px'} />Approve All</button>
+                        <button className='me-2 btn btn-sm btn-outline-danger'><X width={'16px'} height={'16px'} />Reject All</button>
+                        <button className='me-2 btn btn-sm btn-outline-primary'><Download width={'16px'} height={'16px'} />Download All</button>
+                      </div>
+                  </div>
+                  
                   <Table responsive>
                     <thead>
                       <tr>
@@ -418,26 +475,41 @@ const StudentDetails = () => {
                               {docType.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}
                             </span>
                           </td>
-                          <td>{getStatusBadge(status)}</td>
+                          <td className='text-capitalize'>{getStatusBadge(status)}</td>
                           <td>
-                            <Button size="sm" color="outline-primary" className="me-2">
-                              View
-                            </Button>
+                            <span
+                            className="me-2 text-primary" onClick={() => onViewImage(userData?.documents[docType])}
+                            >
+                              <Eye width={'16px'} height={'16px'}/>
+                            </span>
                             {status === 'pending' && (
                               <>
-                                <Button size="sm" color="success" className="me-2">
-                                  Approve
-                                </Button>
-                                <Button size="sm" color="danger">
-                                  Reject
-                                </Button>
+                                <span className="me-2 text-success" onClick={()=>approveImage('approved',docType)}>
+                                  <CheckCheck width={'16px'} height={'16px'} />
+                                </span>
+                                <span className='text-danger' onClick={()=>approveImage('rejected',docType)}>
+                                  <X width={'16px'} height={'16px'}/>
+                                </span>
                               </>
                             )}
+                            <span 
+                              className="ms-2 text-primary"
+                              onClick={() => downloadFile(userData?.documents[docType], docType)}>
+                              <Download width={'16px'} height={'16px'}/>
+                            </span>
                           </td>
                         </tr>
                       ))}
                     </tbody>
                   </Table>
+                    <Modal isOpen={viewImage} toggle={() => setViewImage(!viewImage)}>
+                      <ModalHeader toggle={() => setViewImage(!viewImage)}>Images</ModalHeader>
+                      <ModalBody>
+                        <div>
+                          <img src={`${NodeURL}/${url}`} className='modal-img'/>
+                        </div>
+                      </ModalBody>
+                    </Modal>
                 </TabPane>
 
                 {/* Applications Tab */}

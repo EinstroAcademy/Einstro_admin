@@ -101,6 +101,8 @@ function University() {
   const [isUniversity, setIsUniversity] = useState(false);
   const [selectedImages, setSelectedImages] = useState([]);
   const [deleteId, setDeleteId] = useState('');
+  const [iconPreview, setIconPreview] = useState(null); // For newly uploaded preview
+const [dbIcon, setDbIcon] = useState(null); // From DB
   
   const [newUniversity, setNewUniversity] = useState({
     name: '',
@@ -126,6 +128,7 @@ function University() {
     startingFee: '',
     englishTests: [],
     acceptanceRate: '',
+     icon: null,
   });
 
   console.log(newUniversity)
@@ -278,6 +281,7 @@ function University() {
       newImages: [],
       removedImages: []
     });
+    setDbIcon(data.icon)
     
     // Set existing images for display
     if (data.images && data.images.length > 0) {
@@ -318,6 +322,7 @@ function University() {
       });
     }
 
+
     request({
       url: '/admin/update/university',
       method: 'POST',
@@ -355,6 +360,19 @@ function University() {
       }
     });
   };
+
+  const handleIconUpload = (event) => {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  if (file.size > 1048576) { // 1MB
+    toast.error("Maximum Icon Size 1MB");
+    return;
+  }
+
+  setNewUniversity({ ...newUniversity, icon: file });
+  setIconPreview(URL.createObjectURL(file)); // For preview
+};
 
   const handleImageUpload = (event) => {
     const selectedFiles = event.target.files;
@@ -487,6 +505,14 @@ function University() {
 
   return (
     <div className="mybookings-table-wrap mt-4">
+      <div>
+              <input
+                className=""
+                type="text"
+                placeholder='Search University'
+                onChange={(e) => search(e.target.value)}
+              />
+            </div>
       <div className='text-end mb-3'>
         <button className="add_blog_btn" onClick={() => setIsUniversity(true)}>
           Add University
@@ -778,6 +804,59 @@ function University() {
                     </div>
                   ))}
                 </div>
+              </div>
+
+              <div className="col-6 mt-3">
+                <label className="font-semi code-red">Upload Icon</label>
+                <div>
+                  <input
+                    type="file"
+                    className="login-input"
+                    accept="image/*"
+                    onChange={handleIconUpload}
+                  />
+                </div>
+                {/* Case 1: Show preview if user uploaded */}
+                {iconPreview ? (
+                  <div className="mt-2 position-relative" style={{ width: "100px" }}>
+                    <img
+                      src={iconPreview}
+                      alt="Preview Icon"
+                      style={{ width: "100px", height: "100px", objectFit: "cover", borderRadius: "8px" }}
+                    />
+                    <div
+                      className="uni-close-btn position-absolute"
+                      style={{ top: "5px", right: "5px", cursor: "pointer" }}
+                      onClick={() => {
+                        setNewUniversity({ ...newUniversity, icon: null });
+                        setIconPreview(null);
+                      }}
+                    >
+                      <img src={closeIcon} className="cross" alt="Remove" />
+                    </div>
+                  </div>
+                ) : (
+                  // Case 2: If no preview, but DB has icon
+                  dbIcon && (
+                    <div className="mt-2 position-relative" style={{ width: "100px" }}>
+                      <img
+                        src={`${NodeURL}/${dbIcon}`} // full API path e.g. `/uploads/universityImages/${dbIcon}`
+                        alt="University Icon"
+                        style={{ width: "100px", height: "100px", objectFit: "cover", borderRadius: "8px" }}
+                      />
+                      <div
+                        className="uni-close-btn position-absolute"
+                        style={{ top: "5px", right: "5px", cursor: "pointer" }}
+                        onClick={() => {
+                          setNewUniversity({ ...newUniversity, icon: null });
+                          setDbIcon(null);
+                        }}
+                      >
+                        <img src={closeIcon} className="cross" alt="Remove" />
+                      </div>
+                    </div>
+                  )
+                )}
               </div>
               
               {/* TinyMCE sections */}

@@ -558,7 +558,7 @@ const deleteCourse=(e,item)=>{
                 University
               </NavLink>
             </NavItem>
-            <NavItem>
+            {/* <NavItem>
               <NavLink
                 className={`${activeTab === "6" ? "active" : ""}`}
                 onClick={() => {
@@ -567,7 +567,7 @@ const deleteCourse=(e,item)=>{
               >
                 Popular Courses
               </NavLink>
-            </NavItem>
+            </NavItem> */}
           </Nav>
         </div>
       </div>
@@ -578,6 +578,7 @@ const deleteCourse=(e,item)=>{
               <input
                 className=""
                 type="text"
+                placeholder='Search Course'
                 onChange={(e) => search(e.target.value)}
               />
             </div>
@@ -701,9 +702,9 @@ const deleteCourse=(e,item)=>{
         <TabPane tabId="5">
           <University />
         </TabPane>
-        <TabPane tabId="6">
+        {/* <TabPane tabId="6">
           <PopularCourse/>
-        </TabPane>
+        </TabPane> */}
       </TabContent>
       <Modal
         isOpen={isCourse}

@@ -160,6 +160,14 @@ function Subject() {
 
   return (
     <div className="mybookings-table-wrap mt-4">
+       <div>
+              <input
+                className=""
+                type="text"
+                placeholder='Search Subject'
+                onChange={(e) => search(e.target.value)}
+              />
+            </div>
         <div className='text-end mb-3'>
           <button className="add_blog_btn"  onClick={()=>setIsSubject(!isSubject)}> Add Subject</button>
         </div>
