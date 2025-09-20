@@ -771,7 +771,7 @@ const [dbIcon, setDbIcon] = useState(null); // From DB
                   />
                 </div>
               </div>
-              <div className="col-6 mt-3">
+              <div className="col-12 mt-3">
                 <label className="font-semi code-red">Upload Image</label>
                 <div>
                   <input

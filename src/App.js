@@ -18,6 +18,8 @@ import NewStudent from "./Components/Pages/Students/NewStudent";
 import StudentDetails from "./Components/Pages/Students/StudentDetails";
 import "react-datepicker/dist/react-datepicker.css";
 import 'react-circular-progressbar/dist/styles.css';
+import Users from "./Components/Pages/Users/Users";
+import NewUser from "./Components/Pages/Users/NewUser";
 
 function App() {
   const toastOptions = {
@@ -76,6 +78,8 @@ function App() {
           <Route path="/student/detail" element={<StudentDetails />} />
           <Route path="/course" element={<Course />} />
           <Route path="/my/account" element={<MyAccount />} />
+          <Route path="/users" element={<Users />} />
+          <Route path="/new/user" element={<NewUser />} />
         </Routes>
         <Toaster
           position="bottom-center"

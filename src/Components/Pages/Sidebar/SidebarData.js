@@ -53,6 +53,16 @@ export const SidebarData =[
         // imgSelected: learningSupportSelected,
         link: '/students',
         bgShade: 'linear-gradient(to right,rgb(0, 137, 249),rgb(0, 55, 255))',
+      },
+      {
+        navItem: 'Users',
+        id: 'users',
+        // show: false,
+        img: student,
+        imgDark:student,
+        // imgSelected: learningSupportSelected,
+        link: '/users',
+        bgShade: 'linear-gradient(to right,rgb(0, 137, 249),rgb(0, 55, 255))',
       }
      
 ]
