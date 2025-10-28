@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Bar, Doughnut } from 'react-chartjs-2';
 import {
   Users,
@@ -18,6 +18,7 @@ import {
 } from 'chart.js';
 import './dashboard.css';
 import Layout from '../Layout/Layout';
+import request from '../../../api/api';
 
 Chart.register(CategoryScale, LinearScale, BarElement, ArcElement, Tooltip, Legend, Title);
 
@@ -66,6 +67,26 @@ const recentApplications = [
 
 
 export default function Dashboard() {
+
+  const [cardData,setCardData] = useState({})
+
+  const fetchDashboardAPI = ()=>{
+    request({
+      url:'/admin/dashboard/api',
+      method:'POST',
+    }).then((res)=>{
+      if(res?.status===1){
+          setCardData(res?.result)
+      }
+    }).catch((err)=>{
+      console.log(err)
+    })
+  }
+
+  useEffect(()=>{
+    fetchDashboardAPI()
+  },[])
+
   return (
     <Layout>
       <div className="dashboard-container">
@@ -75,7 +96,10 @@ export default function Dashboard() {
             <div key={i} className="dashboard-stat-card">
               <div className="dash-stat-icon">{card.icon}</div>
               <div className="dash-stat-info">
-                <div className="dash-stat-value">{card.value}</div>
+                <div className="dash-stat-value">{card?.label === "Courses" ?
+                  cardData?.course : card?.label === "Universities" ?
+                    cardData?.university : card?.label === "Users" ?
+                      cardData?.user : 0}</div>
                 <div className="dash-stat-label">{card.label}</div>
               </div>
             </div>

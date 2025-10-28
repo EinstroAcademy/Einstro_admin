@@ -2,6 +2,7 @@ import React from 'react'
 import './topbar.css'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import profile from '../../../Images/icons/profile.png'
+import logo from "../../../Images/home/studytezorg.png";
 import dropdown from '../../../Images/icons/dropdown.png'
 import { useDispatch } from 'react-redux'
 import { logout } from '../../../redux/login/login'
@@ -9,7 +10,7 @@ import toast from 'react-hot-toast'
 import { SidebarData } from '../Sidebar/Sidebar'
 
 
-import logo from '../../../Images/login/Einstro Logo.png'
+// import logo from '../../../Images/login/Einstro Logo.png'
 
 function Topbar() {
   const dispatch=useDispatch()

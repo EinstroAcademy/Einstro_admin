@@ -574,13 +574,36 @@ const deleteCourse=(e,item)=>{
       <TabContent activeTab={activeTab}>
         <TabPane tabId="1">
           <div className="mybookings-table-wrap mt-4">
-            <div>
+            <div className="d-flex gap-2">
               <input
                 className=""
                 type="text"
                 placeholder='Search Course'
                 onChange={(e) => search(e.target.value)}
               />
+              <div><Select 
+                            placeholder="Select Qualification" 
+                            styles={customStyles} 
+                            options={studyLevels}
+                            isClearable
+                            isMulti
+                            onChange={(e)=>setTableOption({...tableOption,qualification:e?.map((li)=>li.value)})}
+                            /></div>
+              <div><Select 
+                            placeholder="Select Country" 
+                            styles={customStyles} 
+                            options={countryOptions}
+                            isClearable
+                            isMulti
+                            onChange={(e)=>setTableOption({...tableOption,country:e?.map((li)=>li.value)})}
+                            /></div>
+                            <div><Select 
+                            placeholder="Select University" 
+                            styles={customStyles} 
+                            options={university}
+                            isClearable
+                            onChange={(e)=>setTableOption({...tableOption,university:e?.value?._id})}
+                            /></div>
             </div>
             <div className="text-end mb-3">
               <button

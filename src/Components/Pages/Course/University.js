@@ -505,13 +505,20 @@ const [dbIcon, setDbIcon] = useState(null); // From DB
 
   return (
     <div className="mybookings-table-wrap mt-4">
-      <div>
+      <div className='d-flex gap-2'>
               <input
                 className=""
                 type="text"
                 placeholder='Search University'
                 onChange={(e) => search(e.target.value)}
               />
+              <div><Select 
+              placeholder="Select Country" 
+              styles={customStyles} 
+              options={countryOptions}
+              isClearable
+              onChange={(e)=>setTableOption({...tableOption,country:e?.value})}
+              /></div>
             </div>
       <div className='text-end mb-3'>
         <button className="add_blog_btn" onClick={() => setIsUniversity(true)}>

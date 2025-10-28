@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import loginImg from '../../../Images/login/login.png'
-import logo from '../../../Images/login/Einstro Logo.png'
+import logo from "../../../Images/home/studytezorg.png";
 import './login.css'
 import { useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'

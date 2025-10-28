@@ -18,7 +18,7 @@ function Tinymce({
       init={{
         height,
         auto_focus,
-        // menubar: false,
+        menubar: false,
         browser_spellcheck: true,
         // fontsize_formats: '8pt 10pt 12pt 14pt 18pt 24pt 36pt',
         plugins: [
