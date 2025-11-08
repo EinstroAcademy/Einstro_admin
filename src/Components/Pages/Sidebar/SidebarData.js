@@ -3,6 +3,7 @@ import study from '../../../Images/icons/abroad_new.svg'
 import note from '../../../Images/icons/blog_new.svg'
 import course from '../../../Images/icons/course_new.svg'
 import student from '../../../Images/icons/student_new.svg'
+import aiStar from '../../../Images/icons/aiStar.png'
 
 
 export const SidebarData =[
@@ -62,6 +63,16 @@ export const SidebarData =[
         imgDark:student,
         // imgSelected: learningSupportSelected,
         link: '/users',
+        bgShade: 'linear-gradient(to right,rgb(0, 137, 249),rgb(0, 55, 255))',
+      },
+      {
+        navItem: 'AI',
+        id: 'AI',
+        // show: false,
+        img: aiStar,
+        imgDark:student,
+        // imgSelected: learningSupportSelected,
+        link: '/prompt',
         bgShade: 'linear-gradient(to right,rgb(0, 137, 249),rgb(0, 55, 255))',
       }
      

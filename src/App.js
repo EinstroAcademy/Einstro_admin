@@ -20,6 +20,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import 'react-circular-progressbar/dist/styles.css';
 import Users from "./Components/Pages/Users/Users";
 import NewUser from "./Components/Pages/Users/NewUser";
+import Chat from "./Components/Pages/Chat/Chat";
 
 function App() {
   const toastOptions = {
@@ -80,6 +81,7 @@ function App() {
           <Route path="/my/account" element={<MyAccount />} />
           <Route path="/users" element={<Users />} />
           <Route path="/new/user" element={<NewUser />} />
+          <Route path="/prompt" element={<Chat/>}/>
         </Routes>
         <Toaster
           position="bottom-center"

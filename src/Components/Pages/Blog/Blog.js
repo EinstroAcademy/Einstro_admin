@@ -11,6 +11,89 @@ import { debounce, truncate } from 'lodash'
 import moment from 'moment'
 import Tinymce from '../../Tinymce/Tinymce'
 import toast from 'react-hot-toast'
+import Select from 'react-select'
+
+
+const customStyles = {
+  container: (styles) => ({
+    ...styles,
+    width: "50%",
+    marginRight: "20px",
+    fontSize: "16px",
+    color: "#101828",
+  }),
+  control: (styles, { isFocused }) => ({
+    ...styles,
+    backgroundColor: "#FFFFFF",
+    cursor: "pointer",
+    minHeight: "40px", // Set desired height
+    height: "40px",     // Fix height
+    borderRadius: "8px",
+    borderColor: isFocused ? "#8f1409" : "#D0D5DD",
+    boxShadow: "none",
+    ":hover": {
+      borderColor: "#8f1409",
+    },
+  }),
+  valueContainer: (styles) => ({
+    ...styles,
+    padding: "2px 8px", // Reduce internal padding
+    height: "40px",     // Align with control height
+  }),
+  menu: (styles) => ({
+    ...styles,
+    backgroundColor: "white",
+    border: "1px solid #D0D5DD",
+    zIndex: 9999,
+  }),
+  option: (styles, { isFocused }) => ({
+    ...styles,
+    cursor: "pointer",
+    backgroundColor: isFocused ? "#D0D5DD" : "white",
+    color: "#101828",
+    ":hover": {
+      backgroundColor: "grey",
+    },
+    fontSize: "14px",
+  }),
+  placeholder: (styles) => ({
+    ...styles,
+    color: "#667085",
+    fontSize: "14px",
+  }),
+  singleValue: (styles) => ({
+    ...styles,
+    color: "#101828",
+  }),
+  indicatorSeparator: () => ({
+    display: "none",
+  }),
+  dropdownIndicator: (styles) => ({
+    ...styles,
+    color: "#98A2B3",
+    padding: "4px", // make icon more compact
+    ":hover": {
+      color: "#98A2B3",
+    },
+  }),
+  menuPortal: (styles) => ({
+  ...styles,
+  zIndex: 9999,
+}),
+};
+
+
+const blogTypeOption =[
+  {
+    label:'Blog',
+    value:'blog'
+  },
+  {
+    label:'Guide',
+    value:'guide'
+  },
+
+]
 
 function Blog() {
     const navigate = useNavigate();
@@ -30,7 +113,8 @@ function Blog() {
         title:'',
         description:"",
         details:"",
-        image:''
+        image:'',
+        type:'',
     })
     const [tableOption, setTableOption] = useState({
       search: "",
@@ -110,6 +194,30 @@ function Blog() {
         setNewBlog((state) => ({ ...state, image: file ,imageUrl:url}));
       }
 
+  const handleDocUpload = (e) => {
+    const [file] = e.target.files;
+
+    if (!file) {
+      toast.error("No file selected.");
+      return;
+    }
+
+    // Allow only PDFs and limit size to 5MB
+    if (file.type !== "application/pdf" || file.size > 5242880) {
+      toast.error("Only PDF files under 5MB are allowed.");
+      e.target.value = ""; // Reset invalid file
+      return;
+    }
+
+    const url = URL.createObjectURL(file);
+    setNewBlog((state) => ({
+      ...state,
+      doc: file,
+      docUrl: url
+    }));
+  };
+
+
       const onSubmitBlog =()=>{
         const {title,details,description,image}=newBlog
 
@@ -145,6 +253,7 @@ function Blog() {
                     details:"",
                     description:"",
                     image:"",
+                    doc:''
                 })
                 getAllBlogList()
             }
@@ -198,6 +307,7 @@ function Blog() {
                     details:"",
                     description:"",
                     image:"",
+                    doc:''
                 })
                 getAllBlogList()
             }
@@ -367,6 +477,18 @@ function Blog() {
                   />
                 </div>
               </div>
+              <div className="col-12 mt-3">
+                <label className="font-semi code-red">Select Type</label>
+                <div>
+                  <Select 
+                  styles={customStyles}
+                  options={blogTypeOption}
+                  isClearable
+                  value={blogTypeOption?.filter((li)=>li?.value === newBlog?.type)}
+                  onChange={(e)=>setNewBlog({...newBlog,type:e.value})}
+                  />
+                </div>
+              </div>
               <div className="col-6 mt-3">
                 <label className="font-semi code-red">Upload Image</label>
                 <div>
@@ -375,6 +497,18 @@ function Blog() {
                     className="login-input"
                     name="image"
                       onChange={(e) => handleImageUpload(e)}
+                  />
+                </div>
+              </div>
+              <div className="col-6 mt-3">
+                <label className="font-semi code-red">Upload Document</label>
+                <div>
+                  <input
+                    type="file"
+                    className="login-input"
+                    name="docs"
+                    accept="application/pdf"
+                      onChange={(e) => handleDocUpload(e)}
                   />
                 </div>
               </div>
