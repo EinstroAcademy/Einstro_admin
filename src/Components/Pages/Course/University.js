@@ -681,7 +681,7 @@ const [dbIcon, setDbIcon] = useState(null); // From DB
                 </div>
               </div>
               <div className="col-6">
-                <label className="font-semi code-red">World Rank</label>
+                <label className="font-semi code-red">QS Rank <span style={{fontSize:'8px',color:'red'}}>Numeric Alone</span></label>
                 <div>
                   <input
                     type="text"

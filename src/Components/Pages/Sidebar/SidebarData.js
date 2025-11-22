@@ -1,5 +1,5 @@
-import dashboard from '../../../Images/icons/dashboard_new.svg'
-import study from '../../../Images/icons/abroad_new.svg'
+import dashboard from '../../../Images/sidebar/layout-dashboard.png'
+import study from '../../../Images/sidebar/plane.png'
 import note from '../../../Images/icons/blog_new.svg'
 import course from '../../../Images/icons/course_new.svg'
 import student from '../../../Images/icons/student_new.svg'
